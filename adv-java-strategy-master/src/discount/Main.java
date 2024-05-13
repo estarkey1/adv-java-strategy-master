@@ -8,11 +8,14 @@ public class Main {
     public static void main(String[] args) {
         List<CustomerOrder> orders = new ArrayList<>();
 
-        //Discount types S for Sale, D for Discount, L for Liquidation
-        orders.add(new CustomerOrder("William Walters", 75.34, 'D'));
-        orders.add(new CustomerOrder("Susan Smothers", 24.12, 's'));
-        orders.add(new CustomerOrder("Jessica Johnson", 273.93, 'L'));
-        orders.add(new CustomerOrder("Richard Ricardo", 171.42, 'D'));
+        DiscountStrategy saleDiscount = new SaleDiscount();
+        DiscountStrategy discountDiscount = new DiscountDiscount();
+        DiscountStrategy liquidationDiscount = new LiquidationDiscount();
+
+        orders.add(new CustomerOrder("William Walters", 75.34, discountDiscount));
+        orders.add(new CustomerOrder("Susan Smothers", 24.12, saleDiscount));
+        orders.add(new CustomerOrder("Jessica Johnson", 273.93, liquidationDiscount));
+        orders.add(new CustomerOrder("Richard Ricardo", 171.42, discountDiscount));
 
         double total = 0;
         for (CustomerOrder order : orders) {
